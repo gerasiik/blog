@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+
+<!--Se carga la imagen-->
+{%block background%}{% load static %}{% static 'core/assets/img/home-bg.jpg'%}{%endblock%}
+
+<!-- se hacen headers dinamicos-->
+{%block headers%}
+<h1>Gerardo Ponce</h1>
+<span class="subheading">Programador web</span>
+<div class="input-group buscador">
+    <input class="form-control" type="text" placeholder="Buscar entradas" aria-label="Enter search term..." aria-describedby="button-search">
+    <button class="btn btn-primary" id="button-search" type="button">Ir</button>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <!-- Post preview-->
+            <div class="post-preview">
+                <a href="post.html">
+                    <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
+                    <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
+                </a>
+                <p class="post-meta">
+                    Posted by
+                    <a href="#!">Start Bootstrap</a>
+                    on September 24, 2023
+                </p>
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+            <!-- Post preview-->
+            <!-- Pager-->
+        </div>
+    </div>
+</div>
+{% endblock %}
