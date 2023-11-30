@@ -690,6 +690,10 @@ progress {
 .buscador{
   margin-top: 10px !important;
 }
+
+.boton .btn-primary{
+  background-color: #006479 !important;
+}
 .col {
   flex: 1 0 0%;
 }

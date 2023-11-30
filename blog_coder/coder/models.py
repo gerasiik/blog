@@ -12,6 +12,7 @@ class Post(models.Model):
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha = models.DateField()
     imagen = models.ImageField(upload_to="posts", null=True, blank=True)
+    slug = models.SlugField(max_length=200, unique=True)
 
     def __str__(self):
         return self.titulo

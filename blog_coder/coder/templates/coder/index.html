@@ -7,9 +7,23 @@
 {%block headers%}
 <h1>Gerardo Ponce</h1>
 <span class="subheading">Programador web</span>
-<div class="input-group buscador">
-    <input class="form-control" type="text" placeholder="Buscar entradas" aria-label="Enter search term..." aria-describedby="button-search">
-    <button class="btn btn-primary" id="button-search" type="button">Ir</button>
+<!--buscador-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 buscador">
+            <form method="GET">
+                <div id="custon-search-input">
+                    <div class="input-group col-md-12">
+                        <input type="text" class="form-control" placeholder="Buscar" name="buscar">
+                        <span class="input-group-list">
+                            <i class = icon icon-search></i>
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
@@ -18,10 +32,11 @@
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
-            {%for post in object_list%}
+            {%for post in posts%}
             <!-- Post preview-->
             <div class="post-preview">
-                <a href="{% url 'article-detail' post.pk%}">
+                <!--el nombre article viene de coder/templates/coder/article.html-->
+                <a href="{% url 'article' post.slug%}">
                     <h2 class="post-title">{{post.titulo}}</h2>
                     <h3 class="post-subtitle">{{post.subtitulo}}</h3>
                 </a>

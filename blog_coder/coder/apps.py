@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CoderblogConfig(AppConfig):
+class CoderConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'coderBlog'
+    name = 'coder'
