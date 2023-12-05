@@ -39,7 +39,19 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "core",
     "coder",
+    # ckeditor and its uploader registered
+    "ckeditor",
+    "ckeditor_uploader",
 ]
+
+CKEDITOR_CONFIGS = {
+    "default": {
+        "toolbar": "full",
+        "height": 300,
+        "width": 800,
+    },
+}
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -120,6 +132,11 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 
+# CKEDITOR CONFIG
+CKEDITOR_UPLOAD_PATH = "media/"
+CKEDITOR_JQUERY_URL = "https://code.jquery.com/jquery-3.6.0.min.js"  # Puedes cambiar la URL si es necesario
+
+# MEDIA CONFIG
 MEDIA_URL = "/media/"  # sirve para llamar la carpeta media
 MEDIA_ROOT = BASE_DIR / "media"  # sirve para subir imagenes o videos
 

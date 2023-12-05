@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 
 # Create your models here.
@@ -8,10 +9,10 @@ from django.contrib.auth.models import User
 class Post(models.Model):
     titulo = models.CharField(max_length=100)
     subtitulo = models.CharField(max_length=100)
-    cuerpo = models.TextField()
+    cuerpo = RichTextField(verbose_name="Contenido")
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha = models.DateField()
-    imagen = models.ImageField(upload_to="posts", null=True, blank=True)
+    imagen = models.URLField(default="Pega el link de una imagen")
     slug = models.SlugField(max_length=200, unique=True)
 
     def __str__(self):
