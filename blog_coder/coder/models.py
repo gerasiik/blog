@@ -16,7 +16,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
 
     def __str__(self):
-        return self.titulo
+        return f"Titulo: {self.titulo} - Autor: {self.autor}"
 
     class Meta:
         verbose_name = "Post"  # traduce el nombre de la app

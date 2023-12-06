@@ -6,36 +6,29 @@
 <h1 class="h3 mb-4 text-gray-800">Posts</h1>
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        <a class="btn btn-primary" href="{% url 'fields' %}">Agregar entradas</a>
     </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Titulo</th>
-                        <th>Subtitulo</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>Titulo</th>
-                        <th>Subtitulo</th>
-                        <th>Acciones</th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    <tr>
-                        <td>Titulo de la entrada</td>
-                        <td>Subtitulo de la entrada</td>
-                        <td>
-                            <button type="button" class="btn btn-success">Editar</button>
-                            <button type="button" class="btn btn-danger">Eliminar</button>
-                        </td>
-                    </tr>
+                
                     
-                </tbody>
+                
+                {%for p in entradas%}
+                <div class="estilizar">
+                    <div class="contenido">
+                        <p>{{p}}</p>
+                    </div>
+                    <div class="botones">
+                        <a  class="btn btn-danger" href="{% url 'EliminarEntradas' p.titulo %}">Eliminar</a>
+                        <a  class="btn btn-success" href="{% url 'EditarEntradas' p.titulo %}">Editar</a>
+
+                    </div>
+                            <!-- poner el nombre del campo-->
+                        
+                </div>
+                {%endfor%}
+                
             </table>
         </div>
     </div>

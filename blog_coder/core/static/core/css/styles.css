@@ -95,6 +95,10 @@
   padding:15px !important;
   margin-right: 5px;
 }
+
+.estilizar{
+  display: flex !important;
+}
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);

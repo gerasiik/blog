@@ -3,6 +3,7 @@ from .models import Post
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from .forms import PostForm
+from django.urls import reverse
 
 
 # Create your views here.
@@ -51,5 +52,40 @@ def fields(request):
     )
 
 
-def crud(request):
-    return render(request, "coder/crud.html")
+# crud de post o enntradas
+
+
+# Leer
+def leerEntradas(request):
+    entradas = Post.objects.all()  # trae todas las entradas
+    contexto = {"entradas": entradas}  # el contexto sirve para imprimir las entradas
+    return render(request, "coder/crud.html", contexto)
+
+
+# Eliminar
+def eliminarEntrada(request, titulo):
+    entrada = Post.objects.get(titulo=titulo)
+    entrada.delete()
+    url = reverse("EliminarEntradas", args=[titulo])
+    # vuelvo al menú
+    entradas = Post.objects.all()  # trae todas las entradas
+    contexto = {"entradas": entradas}  # el contexto sirve para imprimir las entradas
+    return render(request, "coder/crud.html", contexto)
+
+
+def editarPost(request, titulo):
+    post = Post.objects.get(titulo=titulo)
+
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect(
+                "/fields/"
+            )  # Cambia 'nombre_de_la_otra_pagina' al nombre de la URL o ruta deseada
+    else:
+        form = PostForm(instance=post)
+
+    return render(
+        request, "coder/editarPost.html", {"form": form, "post": post, "titulo": titulo}
+    )
