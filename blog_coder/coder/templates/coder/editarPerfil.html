@@ -1,0 +1,16 @@
+{%extends 'coder/base2.html'%}
+
+{%block content%}
+<h1>Formulario- Editar  Perfil</h1>
+<h1> de {{user.username}}</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{miFormulario.as_table}}
+    </table>
+
+    <input class="btn btn-primary" type="submit" value="Guardar cambios">
+    
+</form>
+{%endblock%}

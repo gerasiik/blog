@@ -144,3 +144,9 @@ MEDIA_ROOT = BASE_DIR / "media"  # sirve para subir imagenes o videos
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# logout
+LOGOUT_REDIRECT_URL = "index"
+
+# redirección de usuario no logeado que intenta ingresar al dashboard
+LOGIN_URL = "login"

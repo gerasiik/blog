@@ -32,39 +32,7 @@
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
-
-            {%if posts %}
-            {%for post in posts%}
-
-            <!-- Post preview-->
-            <div class="post-preview">
-                <!--el nombre article viene de coder/templates/coder/article.html-->
-                <a href="{% url 'article' post.slug%}">
-                    <h2 class="post-title">{{post.titulo}}</h2>
-                    <h3 class="post-subtitle">{{post.subtitulo}}</h3>
-                </a>
-                <p class="post-meta">
-                    Posted by
-                    <a href="#!">{{post.autor}}</a>
-                    {{post.fecha}}
-                </p>
-            </div>
-            
-            
-            {%endfor%}
-            {%else%}
-            <div>
-                {{ mensaje }}
-              <a  href="{% url 'login' %}" class="btn btn-primary" >Regresar a login</a>
-            </div>
-            <h1>No hay articulos</h1>
-            {%endif%}
-            
-            
-            <!-- Divider-->
-            <hr class="my-4" />
-            <!-- Post preview-->
-            <!-- Pager-->
+           <h1>{{mensaje}}</h1> 
         </div>
     </div>
 </div>
