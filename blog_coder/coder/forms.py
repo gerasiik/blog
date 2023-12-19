@@ -2,7 +2,7 @@ from django import forms
 
 # Importar ckeditor widget
 from ckeditor.widgets import CKEditorWidget
-from .models import Post
+from .models import Post, Avatar
 
 # editar perfil
 from django.contrib.auth.forms import UserCreationForm  # Agrega esta línea
@@ -68,3 +68,11 @@ class UserRegisterForm(UserCreationForm):
             "first_name",
         ]
         help_texts = {k: "" for k in fields}
+
+
+class AvatarFormulario(forms.Form):
+    imagen = forms.ImageField()
+
+    class Meta:
+        model = Avatar
+        fields = ["imagen"]

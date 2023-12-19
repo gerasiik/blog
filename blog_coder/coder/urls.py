@@ -13,6 +13,7 @@ from .views import (
     login_user,
     register,
     editarPerfil,
+    agregarAvatar,
 )
 
 urlpatterns = [
@@ -32,4 +33,5 @@ urlpatterns = [
         "logout/", LogoutView.as_view(template_name="coder/logout.html"), name="logout"
     ),
     path("editarPerfil/", editarPerfil, name="editarPerfil"),
+    path("editarAvatar/", agregarAvatar, name="editarAvatar"),
 ]

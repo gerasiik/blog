@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Post
+from .models import Post, Avatar
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
-from .forms import PostForm
+from .forms import PostForm, AvatarFormulario
 from django.urls import reverse
 
 
@@ -15,6 +15,9 @@ from django.contrib.auth import login, logout, authenticate, logout
 
 # formulario para editar  perfil
 from coder.forms import UserEditForm
+
+# avatar
+from django.contrib.auth.models import User
 
 # Create your views here.
 # def index(request):
@@ -38,6 +41,14 @@ def post(request, slug):  # este es el slug para redirigir
 
 @login_required
 def fields(request):
+    # imprime el avatar
+    avatares = Avatar.objects.filter(user=request.user.id)
+    url_avatar = None
+
+    if avatares.exists():
+        url_avatar = avatares[0].imagen.url
+    # imprime el avatar
+
     # creacion de formulario
     posts = Post.objects.all()
 
@@ -60,8 +71,10 @@ def fields(request):
         miFormulario = PostForm()
 
     return render(
-        request, "coder/fields.html", {"miFormulario": miFormulario, "posts": posts}
-    )
+        request,
+        "coder/fields.html",
+        {"url": url_avatar, "miFormulario": miFormulario, "posts": posts},
+    )  # Se pone este contexto "url": url_avatar para imprimir el avatar
 
 
 # crud de post o enntradas
@@ -69,8 +82,17 @@ def fields(request):
 
 # Leer
 def leerEntradas(request):
+    avatares = Avatar.objects.filter(user=request.user.id)
+    url_avatar = None
+
+    if avatares.exists():
+        url_avatar = avatares[0].imagen.url
+
     entradas = Post.objects.all()  # trae todas las entradas
-    contexto = {"entradas": entradas}  # el contexto sirve para imprimir las entradas
+    contexto = {
+        "entradas": entradas,
+        "url": url_avatar,
+    }  # el contexto sirve para imprimir las entradas
     return render(request, "coder/crud.html", contexto)
 
 
@@ -156,6 +178,11 @@ def register(request):
 
 
 def editarPerfil(request):
+    avatares = Avatar.objects.filter(user=request.user.id)
+    url_avatar = None
+
+    if avatares.exists():
+        url_avatar = avatares[0].imagen.url
     # Instancia login
     usuario = request.user
 
@@ -179,5 +206,31 @@ def editarPerfil(request):
     return render(
         request,
         "coder/editarPerfil.html",
-        {"miFormulario": miFormulario, "usuario": usuario},
+        {"url": url_avatar, "miFormulario": miFormulario, "usuario": usuario},
+    )
+
+
+def agregarAvatar(request):
+    # imprime el avatar
+    avatares = Avatar.objects.filter(user=request.user.id)
+    url_avatar = None
+
+    if avatares.exists():
+        url_avatar = avatares[0].imagen.url
+    # imprime el avatar
+
+    if request.method == "POST":
+        miFormulario = AvatarFormulario(request.POST, request.FILES)
+        if miFormulario.is_valid():
+            u = User.objects.get(username=request.user)
+            avatar = Avatar(user=u, imagen=miFormulario.cleaned_data["imagen"])
+            avatar.save()
+            return render(request, "coder/bienvenido.html")
+    else:
+        miFormulario = AvatarFormulario()
+    return render(
+        request,
+        "coder/cambiarAvatar.html",
+        {"url": url_avatar, "miFormulario": miFormulario},
+        # Se pone este contexto "url": url_avatar para imprimir el avatar
     )
